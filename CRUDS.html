@@ -1,72 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CRUDS Product Management</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="CRUDS.css">
-    
 </head>
-
 <body>
+    <!-- Wallet Display -->
+    <div id="wallet" class="wallet-display">
+        Wallet: $0.00
+    </div>
+
+    <!-- Message Box -->
+    <div id="messageBox" class="hidden"></div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="passwordModalTitle">Set Your Password</h3>
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <div class="modal-buttons">
+                <button id="passwordSubmitBtn" class="password-submit">Submit</button>
+                <button id="passwordCancelBtn" class="password-cancel hidden">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="confirmationMessage">Are you sure?</h3>
+            <div class="modal-buttons">
+                <button id="confirmYesBtn" class="confirm-yes">Yes</button>
+                <button id="confirmNoBtn" class="confirm-no">No</button>
+            </div>
+        </div>
+    </div>
+
     <div class="crud">
         <div class="head">
             <h2>CRUDS</h2>
-            <p>PRODUCT MANAGMENT BY Y. LOAI</p>
+            <p>PRODUCT MANAGEMENT BY Y. LOAI</p>
         </div>
         <div class="inputs">
-            <input type="text" id="title" placeholder="title">
-            <div class="price">
+            <input type="text" id="title" placeholder="Title" class="mb-2">
+            <div class="price flex justify-between gap-2 mb-2">
                 <input onkeyup="getTotal()" type="text" id="price" placeholder="Price">
                 <input onkeyup="getTotal()" type="text" id="taxes" placeholder="Taxes">
                 <input onkeyup="getTotal()" type="text" id="ads" placeholder="Ads">
                 <input onkeyup="getTotal()" type="text" id="discount" placeholder="Discount">
-                <small id="total"></small>
+                <small id="total" class="flex-grow text-right"></small>
             </div>
             <input type="number" id="count" placeholder="Count">
             <input type="text" id="category" placeholder="Category">
             <div id="trio"></div>
             <button id="submit">Create</button>
-
+            <button id="resetWalletBtn" class="bg-blue-700 hover:bg-blue-500">Reset Wallet</button>
         </div>
         <div class="outputs">
             <div class="searchblock">
                 <input onkeyup="searchData(this.value)" type="text" id="search" placeholder="Search">
+                <div class="searchbtn">
+                    <button id="searchTitle" onclick="getSearchMood(this.id)">Search By Title</button>
+                    <button id="searchCategory" onclick="getSearchMood(this.id)">Search By Category</button>
+                </div>
+            </div>
+            <div id="deleteAll"></div>
 
-            
-            <div class="searchbtn">
-                <button id="searchTitle" onclick="getSearchMood(this.id)"> Search By Title</button>
-                <button id="searchCategory" onclick="getSearchMood(this.id)"> Search By Category</button>
-            </div>
-            </div>
-           <div id="deleteAll">
-            
-           </div>
-            <table>
-                <th>id</th>
-                <th>title</th>
-                <th>price</th>
-                <th>taxes</th>
-                <th>ads</th>
-                <th>discount</th>
-                <th>total</th>
-                <th>category</th>
-                <th>update</th>
-                <th>delet</th>
-                
-                 
-            
-            <tbody id="tbody">
-      
-            </tbody>
+
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Taxes</th>
+                        <th>Ads</th>
+                        <th>Discount</th>
+                        <th>Total</th>
+                        <th>Category</th>
+                        <th>Count</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>Sell</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
             </table>
         </div>
+        <div id="empty">There are no Products</div>
     </div>
-
-
 
     <script src="CRUDS.js"></script>
 </body>
-
 </html>
